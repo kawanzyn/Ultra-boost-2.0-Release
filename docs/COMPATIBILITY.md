@@ -1,17 +1,23 @@
-# Compatibility
+# Compatibility — UltraBoost Basic
 
-## Visual engine and dashboard
-The Basic distribution preserves the earlier v0.4.0 client-side visual engine. The Premium DEV bundle includes the same reversible visual engine inside a new responsive multi-page dashboard. Prior user testing reported the three visual profiles, buttons and texture restoration working in that user's runtime; this is not a universal compatibility guarantee.
+## Runtime
 
-The dashboard is built with standard client UI services and touch/mouse input. Device-specific layout, executor restrictions and performance still require testing. FPS values are client Heartbeat estimates, not hardware telemetry or a guarantee of rendered FPS. Benchmark entries are manually recorded rolling averages.
+UltraBoost Basic is a standalone Luau client script that uses standard Roblox client APIs. It expects a valid `Players.LocalPlayer` and that player's `PlayerGui`.
 
-## Server Finder
-The HTTP adapter probes request/http_request, syn.request, http.request, game:HttpGet or HttpService:GetAsync. Availability and permission depend on the runtime. If no transport works, the Finder reports an error rather than fabricating results.
+The script is intended for a LocalScript/client context in an experience you own or are authorized to modify. Runtime restrictions and experience-specific behavior can still prevent individual changes from applying.
 
-The EntryAdapter checks TeleportToPlaceInstance availability and wraps calls in pcall. Method exposure does not prove that teleporting is permitted. A submitted request is not treated as a confirmed arrival.
+## What the modes change
 
-Missing ping/fps values remain unavailable. Reported ping is not guaranteed to equal the player's actual latency. Oldest Empty uses local observations rather than actual instance creation time or exact time empty.
+The visual profiles may adjust eligible environmental materials, textures, effects, terrain decoration/colors, lighting shadows and local transparency. The script uses conservative name/class checks to avoid many gameplay-related objects, but no heuristic can identify every custom object in every experience.
 
-Game Profiles are in-memory for the active script session only. The Premium DEV bundle currently has no key protection or licensing backend.
+## Performance and authority limits
 
-No anti-cheat bypass, server-side mutation or remote-event abuse is implemented.
+- FPS is estimated from Heartbeat updates; it is not a hardware-level or rendered-frame benchmark.
+- Visual changes are local to the client.
+- The script cannot guarantee a fixed frame rate, a specific RAM reduction, lower server load or lower network latency.
+- Local collision changes may be ignored or overridden by server authority.
+- The script does not modify server-owned state, invoke remote events, delete game instances or bypass anti-cheat systems.
+
+## Restoration
+
+The script records original values before changing supported properties and provides a restore action. Restoration is best-effort: properties that could not be read or changed may not be recoverable, and other scripts may independently modify the same properties during the session.

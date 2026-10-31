@@ -1,37 +1,34 @@
-# UltraBoost 2.0
+# UltraBoost Basic
 
-This private repository contains the Premium development line and the shared visual engine.
+UltraBoost Basic is the free, keyless client-side visual tuning edition of UltraBoost.
 
-## Product split
+## Features
 
-- **UltraBoost Basic:** public, keyless distribution in [kawanzyn/Ultra-boost-2.0-Release](https://github.com/kawanzyn/Ultra-boost-2.0-Release).
-- **UltraBoost Premium DEV:** internal test bundle at `dist/UltraBoost-Premium-DEV.lua`. It has no active key gate and is not a public release.
-- **Premium licensing:** backend validation, device limits, revocation and monetized key acquisition remain planned work. No fake client-side key check is used.
+- **Ultra:** strongest supported local environment simplification.
+- **Balanced:** a middle-ground visual profile.
+- **Light:** lightweight material and texture simplification.
+- **Environment collision toggle:** optional local collision changes for eligible environmental parts.
+- **FPS monitor:** approximate client frame-rate sampling.
+- **Restore:** restores the properties recorded by the script.
+- **Touch and mouse support:** draggable panel with minimize and restore controls.
 
-## Premium DEV 2.0 features in the current bundle
+## Download
 
-- Unified responsive dashboard with Home, Optimizer, Auto, Performance Lab, Server Finder, Smart Restore, Game Profiles and Settings.
-- Custom Mode controls for textures, decals, effects, vegetation, material simplification, shadows and environment visibility.
-- Auto Optimizer with 30/45/60 FPS targets and stability hysteresis.
-- Performance Lab with current/average/min/max FPS estimates, session duration, estimated frame time, a recent stability trace, and manual baseline/optimized markers.
-- Server Finder with Empty Server, Low Population, Oldest Empty, Low Ping and Balanced filters; maximum population setting; recent-visit exclusion; refresh/history/statistics; optional 30-second auto-refresh; bounded entry attempts.
-- Smart Restore for textures, materials and Lighting, plus Restore All.
-- Quick HUD and session-only profiles keyed by PlaceId.
+- [Standalone Basic script](dist/UltraBoost-Basic.lua)
+- [Legacy root file](UltraBoost.lua)
 
-## Important limits
+The root-level `UltraBoost.lua` is kept for compatibility with existing Basic loaders. It is identical to `dist/UltraBoost-Basic.lua`.
 
-All visual changes are local client changes. FPS is estimated from client frame updates; benchmark markers are manual samples, not a controlled performance lab. The script cannot promise a fixed frame rate, free RAM, lower server load or lower network latency.
+## Installation
 
-Server Finder relies on the supplied public-list endpoint and whatever HTTP/teleport capabilities the runtime exposes. Missing ping/FPS values remain unavailable. "Oldest Empty" means the earliest locally observed empty sequence, not actual server creation time. A teleport request or "started" signal is not proof of arrival.
+See [Setup](docs/SETUP.md) and [Compatibility](docs/COMPATIBILITY.md).
 
-Game Profiles currently persist only in the current script session. The Premium DEV bundle is not protected by a key system. The private raw GitHub file cannot be fetched anonymously by an executor; do not embed a personal GitHub token in a loader.
+## Important limitations
 
-## Repository layout
+UltraBoost Basic changes eligible properties locally on the client. It does not remove server-side work, guarantee a fixed FPS, free a specific amount of RAM, reduce network latency, or bypass anti-cheat systems. Actual results depend on the experience, device, and runtime.
 
-- `src/`: modular client engine and Premium dashboard.
-- `src/ServerFinder/`: HTTP adapter, discovery, ranking, observation history and entry adapter.
-- `dist/UltraBoost-Basic.lua`: keyless public baseline.
-- `dist/UltraBoost-Premium-DEV.lua`: private standalone development build.
-- `docs/`: design, compatibility and test notes.
+Use it only in experiences and client environments where local scripts are permitted. A server may override local collision behavior.
 
-The original `UltraBoost` and `UltraBoost-Release-` repositories were not modified.
+## License
+
+The public Basic distribution is provided under the MIT License. See [LICENSE](LICENSE).
